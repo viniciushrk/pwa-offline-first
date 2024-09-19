@@ -1,25 +1,243 @@
 ﻿@{
-    ViewData["Title"] = "Cadastro de Deficiente";
+    ViewData["Title"] = "CADASTRO ESTADUAL DA PESSOA COM DEFICIÊNCIA";
 }
-
 <div class="container mt-5">
     <h2 class="text-center">Cadastro de Deficiente</h2>
     <form asp-action="Cadastrar" method="post" class="mt-4">
+        @* Nome *@
         <div class="form-group mb-3">
             <label for="Nome">Nome</label>
             <input type="text" class="form-control" id="Nome" name="Nome" placeholder="Digite o nome completo" required>
         </div>
 
+        @* Cp´f *@
         <div class="form-group mb-3">
             <label for="CPF">CPF</label>
             <input type="text" class="form-control" id="CPF" name="CPF" placeholder="Digite o CPF" required>
         </div>
 
+        @* Data de Nascimento *@
         <div class="form-group mb-3">
             <label for="DataNascimento">Data de Nascimento</label>
             <input type="date" class="form-control" id="DataNascimento" name="DataNascimento" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        @* DeficienteEmDomicilio *@
+        <div class="form-group mb-3">
+            <label for="DeficienteEmDomicilio">1. Há alguma pessoa com deficiência que reside neste domicílio?</label>
+            <select type="date" class="form-control" id="DeficienteEmDomicilio" name="DeficienteEmDomicilio" required>
+                <option value="">Selecione...</option>
+                <option value="1">Não</option>
+                <option value="2">Sim</option>
+            </select>
+        </div>
+
+        @* DeficientePossuiLaudo *@
+        <div class="form__deciente__true">
+            <div class="form-group mb-3">
+                <label for="DeficientePossuiLaudo">
+                    2. A pessoa com deficiência tem laudo/ relatório/ parecer de um
+                    especialista ou de um médico? (Obs: se tiver os dois, marcar
+                    apenas opção “ laudo médico”)
+                </label>
+                <select type="date" class="form-control" id="DeficientePossuiLaudo" name="DeficientePossuiLaudo" required>
+                    <option value="">Selecione...</option>
+                    <option value="1">1. Não</option>
+                    <option value="2">
+                        2. Laudo/ relatório/ parecer de especialista
+                    </option>
+                    <option value="3">
+                        3. Laudo médico
+                    </option>
+                </select>
+            </div>
+        </div>
+        
+        @* DescritivoLaudo *@
+        <div class="form__deficiente__descritivo__laudo">
+            <div class="form-group mb-3">
+                <label for="DescritivoLaudo">
+                    a. Qual é o CID ou CIF descrito no laudo/ relatório/ parecer?
+                </label>
+                <input type="text" class="form-control" id="DescritivoLaudo" name="DescritivoLaudo" placeholder=" Qual é o CID ou CIF descrito no laudo/ relatório/ parecer?" required>
+            </div>
+        </div>
+
+        @* DeficientePossuiQualDeficiencia *@
+        <div class="form__deficiente__qual__deficiencia">
+            <div class="form-group mb-3">
+                <label for="DeficientePossuiQualDeficiencia">
+                    b. Qual é a deficiência?
+                </label>
+                <select type="date" class="form-control" id="DeficientePossuiQualDeficiencia" name="DeficientePossuiQualDeficiencia" required>
+                    <option value="">Selecione...</option>
+                    <option value="1">1. Visual</option>
+                    <option value="2">
+                        2. Auditiva
+                    </option>
+                    <option value="3">
+                        3. Física (motora)
+                    </option>
+                    <option value="3">
+                        4. Intelectual
+                    </option>
+                    <option value="3">
+                        5. Autismo (TEA)
+                    </option>
+                </select>
+            </div>
+        </div>
+        
+        @* DeficientePossuiQualDeficiencia *@
+        <div class="form__deficiente__faz__reabilitacao">
+            <div class="form-group mb-3">
+                <label for="DeficienteFazReabilitacao">
+                    3. A pessoa com deficiência faz reabilitação?
+                </label>
+                <select type="date" class="form-control" id="DeficienteFazReabilitacao" name="DeficienteFazReabilitacao" required>
+                    <option value="">Selecione...</option>
+                    <option value="1">1. Não</option>
+                    <option value="2">2. Sim</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form__deficiente__faz__reabilitacao__true">
+            <div class="form-group mb-3">
+                <label for="">
+                    a. Com qual profissional a pessoa com deficiência faz
+                    reabilitação?
+                </label>
+                
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Adicionar
+                </button>
+
+                <div class="container mt-5">
+                    <table class="table table-secondary" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>Profissional</th>
+                                <th>Tipo de Instituição</th>
+                                <th>Instituição</th>
+                                <th>Reabilitação em outro município?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- As novas linhas da tabela serão adicionadas aqui -->
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Adicione as opções</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group mb-3">
+                                    <label for="DeficienteFazReabilitacaoComQualProfissional">
+                                        a. Com qual profissional a pessoa com deficiência faz
+                                        reabilitação?
+                                    </label>
+
+                                    <select class="form-control" id="DeficienteFazReabilitacaoComQualProfissional" name="DeficienteFazReabilitacaoComQualProfissional" required>
+                                        <option value="">Selecione...</option>
+                                        <option value="1">1. Fisioterapeuta</option>
+                                        <option value="2">2. Terapeuta ocupacional</option>
+                                        <option value="3">3. Fonoaudiólogo</option>
+                                        <option value="4">4. Psicopedagogo</option>
+                                        <option value="5">5. Psicólogo</option>
+                                        <option value="6">6. Musicoterapeuta</option>
+                                        <option value="7">7. Neuropsicopedagogo</option>
+                                        <option value="8">8. Nutricionista</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="DeficienteFazReabilitacaoQualTipoInstituicao">
+                                        b. Qual é o tipo de instituição que a pessoa com deficiência
+                                        faz reabilitação?
+                                    </label>
+
+                                    <select class="form-control" id="DeficienteFazReabilitacaoQualTipoInstituicao" name="DeficienteFazReabilitacaoQualTipoInstituicao" required>
+                                        <option value="">Selecione...</option>
+                                        <option value="1">1. Pública</option>
+                                        <option value="2">2. Privada</option>
+                                        <option value="3">3. 3º setor</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="DeficienteFazReabilitacaoEmQualReabilitacao">
+                                        c. Em qual instituição a pessoa com deficiência faz
+                                        reabilitação?
+                                    </label>
+
+                                    <select class="form-control" id="DeficienteFazReabilitacaoEmQualReabilitacao" name="DeficienteFazReabilitacaoEmQualReabilitacao" required>
+                                        <option value="">Selecione...</option>
+                                        <option value="1">1. CERO - Porto Velho (estadual)</option>
+                                        <option value="2">2. CER - Porto Velho (municipal)</option>
+                                        <option value="3">3. CER - Ji-paraná</option>
+                                        <option value="4">4. CER - Rolim de Moura</option>
+                                        <option value="5">5. CER - Cacoal</option>
+                                        <option value="6">6. CER - Vilhena</option>
+                                        <option value="7">7. CER - Ariquemes</option>
+                                        <option value="8">8. CER - Santa Marcelina</option>
+                                        <option value="9">9. Clínica Limiar</option>
+                                        <option value="10">10. CER - DREAM (Hospital de Amor)</option>
+                                        <option value="11">11. APAE</option>
+                                        <option value="12">12. PESTALOZZI</option>
+                                        <option value="13">13. Outros</option>
+                                    </select>
+
+                                    <div id="DeficienteFazReabilitacaoEmQualReabilitacaoOutro" class="form-group mb-3 form__deficiente_faz__reabilitacao__em__qual__reabilitacao__outro">
+                                        <label for="DescritivoLaudo">
+                                            Por favor, especificar
+                                        </label>
+                                        <input type="text" class="form-control" id="DescritivoLaudo" name="DescritivoLaudo" placeholder=" Qual é o CID ou CIF descrito no laudo/ relatório/ parecer?" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="DeficienteFazReabilitacaoEmOutroMunicipio">
+                                        d. A pessoa com deficiência faz reabilitação em outro
+                                        município?
+                                    </label>
+
+                                    <select type="date" class="form-control" id="DeficienteFazReabilitacaoEmOutroMunicipio" name="DeficienteFazReabilitacaoEmOutroMunicipio" required>
+                                        <option value="">Selecione...</option>
+                                        <option value="1">1. Sim</option>
+                                        <option value="2">2. Não</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="addDataBtn">Adicionar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form__deciente__false">
+            <div>
+                <h5>Em desenvolvimento...</h5>
+            </div>
+        </div>
+    
+        <button type="button" id="CadastrarDeficiente" class="btn btn-success btn-lg mb-2">Cadastrar</button>
     </form>
+
+    <script src="~/indexedDB.js"></script>
+    <script src="~/js/cadastro/index.js"></script>
 </div>

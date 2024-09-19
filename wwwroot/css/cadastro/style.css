@@ -1,0 +1,24 @@
+﻿.form__deciente__true {
+    display: none;
+}
+
+.form__deciente__false {
+    display: none;
+}
+
+.form__deficiente__descritivo__laudo {
+    display: none;
+}
+
+.form__deficiente__qual__deficiencia {
+    display: none;
+}
+
+.form__deficiente__faz__reabilitacao__true {
+    display: none;
+}
+
+.form__deficiente_faz__reabilitacao__em__qual__reabilitacao__outro {
+    display: none;
+}
+
