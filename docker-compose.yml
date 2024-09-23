@@ -1,0 +1,6 @@
+services:
+  cadastro-especial:
+    image: ${DOCKER_REGISTRY-}cadastroespecial
+    build:
+      context: .
+      dockerfile: Web/Dockerfile

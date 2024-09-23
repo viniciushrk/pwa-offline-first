@@ -7,7 +7,7 @@
     <RootNamespace>cadastro_especial</RootNamespace>
     <UserSecretsId>2f89b27f-b4f8-4da6-871b-e2dee676f6cf</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>.</DockerfileContext>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
